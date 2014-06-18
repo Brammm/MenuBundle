@@ -1,18 +1,29 @@
 <?php
 
-namespace Brammm\MenuBundle\Twig;
+namespace Brammm\MenuBundle\Twig\Extension;
 
 use Brammm\MenuBundle\Menu\MenuRendererInterface;
+use Brammm\MenuBundle\Twig\TokenParser\MenuThemeTokenParser;
 
 class MenuExtension extends \Twig_Extension
 {
 
     /** @var MenuRendererInterface */
-    private $renderer;
+    public $renderer;
 
     public function __construct(MenuRendererInterface $renderer)
     {
         $this->renderer = $renderer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTokenParsers()
+    {
+        return array(
+            new MenuThemeTokenParser(),
+        );
     }
 
     /**

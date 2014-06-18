@@ -18,4 +18,9 @@ class MenuRenderer implements MenuRendererInterface
     {
         return $this->theme;
     }
+
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
+    }
 } 
