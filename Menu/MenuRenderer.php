@@ -5,12 +5,13 @@ namespace Brammm\MenuBundle\Menu;
 class MenuRenderer implements MenuRendererInterface
 {
 
-    private $theme = 'template!';
+    private $theme;
     private $twig;
 
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(\Twig_Environment $twig, $theme)
     {
-        $this->twig = $twig;
+        $this->twig  = $twig;
+        $this->theme = $theme;
     }
 
 

@@ -18,6 +18,7 @@
 
         <service id="brammm_menu.menu_renderer" class="%brammm_menu.menu_renderer.class%">
             <argument type="service" id="twig" />
+            <argument>%brammm_menu.theme%</argument>
         </service>
 
     </services>
