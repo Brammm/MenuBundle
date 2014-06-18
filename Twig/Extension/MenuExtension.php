@@ -2,20 +2,26 @@
 
 namespace Brammm\MenuBundle\Twig;
 
-use Brammm\MenuBundle\Menu\MenuRenderer;
+use Brammm\MenuBundle\Menu\MenuRendererInterface;
 
 class MenuExtension extends \Twig_Extension
 {
+
+    /** @var MenuRendererInterface */
+    private $renderer;
+
+    public function __construct(MenuRendererInterface $renderer)
+    {
+        $this->renderer = $renderer;
+    }
 
     /**
      * {@inheritdoc}
      */
     public function getFunctions()
     {
-        $renderer = new MenuRenderer();
-
         return [
-            new \Twig_SimpleFunction('hello_world', [$renderer, 'render']),
+            new \Twig_SimpleFunction('brammm_menu', [$this->renderer, 'render']),
         ];
     }
 
