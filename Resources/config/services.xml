@@ -5,12 +5,20 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="brammm_menu.twig.extension.menu">Brammm\MenuBundle\Twig\MenuExtension</parameter>
+        <parameter key="brammm_menu.twig.extension.menu.class">Brammm\MenuBundle\Twig\Extension\MenuExtension</parameter>
+        <parameter key="brammm_menu.menu_renderer.class">Brammm\MenuBundle\Menu\MenuRenderer</parameter>
     </parameters>
 
     <services>
-        <service id="brammm_menu.example" class="%brammm_menu.twig.extension.menu%">
+
+        <service id="brammm_menu.twig.extension.menu" class="%brammm_menu.twig.extension.menu.class%" public="false">
+            <argument type="service" id="brammm_menu.menu_renderer" />
             <tag name="twig.extension" />
         </service>
+
+        <service id="brammm_menu.menu_renderer" class="%brammm_menu.menu_renderer.class%">
+            <argument type="service" id="twig" />
+        </service>
+
     </services>
 </container>
