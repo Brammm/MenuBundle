@@ -1,4 +1,0 @@
-MenuBundle
-==========
-
-A menu bundle
