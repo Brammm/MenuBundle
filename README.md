@@ -1,0 +1,4 @@
+MenuBundle
+==========
+
+A menu bundle
