@@ -7,5 +7,19 @@
 {% endblock %}
 
 {% block menu_item %}
-    <li><a href="#">{{ item.name }}</a></li>
+    <li>
+        {{ menu_link(item) }}
+        {% if item.hasChildren %}
+            {{ menu(item) }}
+        {% endif %}
+    </li>
+{% endblock %}
+
+{% block menu_link %}
+    {% if item.uri %}
+        {% set uri = item.uri %}
+    {% else %}
+        {% set uri = path(item.path) %}
+    {% endif %}
+    <a href="{{ uri }}">{{ item.name }}</a>
 {% endblock %}

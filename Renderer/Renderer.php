@@ -24,9 +24,14 @@ class Renderer implements RendererInterface
         $this->setTheme($theme);
     }
 
-    public function renderMenu($menuName)
+    public function render($menuName)
     {
         $menu = $this->provider->getMenu($menuName);
+        return $this->renderBlock('menu', ['menu' => $menu]);
+    }
+
+    public function renderMenu(MenuItem $menu)
+    {
         return $this->renderBlock('menu', ['menu' => $menu]);
     }
 
@@ -35,9 +40,15 @@ class Renderer implements RendererInterface
         return $this->renderBlock('menu_item', ['item' => $item]);
     }
 
+    public function renderLink(MenuItem $item)
+    {
+        return $this->renderBlock('menu_link', ['item' => $item]);
+    }
+
     public function renderBlock($block, $data = [])
     {
-        return $this->theme->renderBlock($block, $data);
+        $template = $this->environment->loadTemplate($this->theme);
+        return $template->renderBlock($block, $data);
     }
 
     /**
@@ -45,19 +56,20 @@ class Renderer implements RendererInterface
      */
     public function setTheme($theme)
     {
-        if ($theme instanceof \Twig_Template) {
-            $this->theme = $theme;
-            return $this;
-        }
-
-        if (is_string($theme)) {
-            $this->theme = $this->environment->loadTemplate($theme);
-            return $this;
-        }
-
-        throw new \InvalidArgumentException(sprintf(
-                '$theme must be string or instance of Twig_Template, is %s.',
-                gettype($theme)
-            ));
+        $this->theme = $theme;
+//        if ($theme instanceof \Twig_Template) {
+//            $this->theme = $theme;
+//            return $this;
+//        }
+//
+//        if (is_string($theme)) {
+//            $this->theme = $this->environment->loadTemplate($theme);
+//            return $this;
+//        }
+//
+//        throw new \InvalidArgumentException(sprintf(
+//                '$theme must be string or instance of Twig_Template, is %s.',
+//                gettype($theme)
+//            ));
     }
 } 
