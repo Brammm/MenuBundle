@@ -1,8 +1,8 @@
 <?php
 
-namespace Brammm\MenuBundle\Menu;
+namespace Brammm\MenuBundle\Renderer;
 
-class MenuRenderer implements MenuRendererInterface
+class Renderer implements RendererInterface
 {
 
     /** @var \Twig_Template */

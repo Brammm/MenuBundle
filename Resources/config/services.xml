@@ -6,7 +6,7 @@
 
     <parameters>
         <parameter key="brammm_menu.twig.extension.menu.class">Brammm\MenuBundle\Twig\Extension\MenuExtension</parameter>
-        <parameter key="brammm_menu.menu_renderer.class">Brammm\MenuBundle\Menu\MenuRenderer</parameter>
+        <parameter key="brammm_menu.menu_renderer.class">Brammm\MenuBundle\Renderer\Renderer</parameter>
     </parameters>
 
     <services>

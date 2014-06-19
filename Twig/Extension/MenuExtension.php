@@ -2,16 +2,16 @@
 
 namespace Brammm\MenuBundle\Twig\Extension;
 
-use Brammm\MenuBundle\Menu\MenuRendererInterface;
+use Brammm\MenuBundle\Renderer\RendererInterface;
 use Brammm\MenuBundle\Twig\TokenParser\MenuThemeTokenParser;
 
 class MenuExtension extends \Twig_Extension
 {
 
-    /** @var MenuRendererInterface */
+    /** @var RendererInterface */
     public $renderer;
 
-    public function __construct(MenuRendererInterface $renderer)
+    public function __construct(RendererInterface $renderer)
     {
         $this->renderer = $renderer;
     }
@@ -32,7 +32,7 @@ class MenuExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('brammm_menu', [$this->renderer, 'renderMenu']),
+            new \Twig_SimpleFunction('brammm_menu_render', [$this->renderer, 'renderMenu']),
         ];
     }
 
