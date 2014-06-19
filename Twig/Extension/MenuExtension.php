@@ -32,7 +32,7 @@ class MenuExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('brammm_menu', [$this->renderer, 'render']),
+            new \Twig_SimpleFunction('brammm_menu', [$this->renderer, 'renderMenu']),
         ];
     }
 

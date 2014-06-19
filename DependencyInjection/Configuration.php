@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('theme')
-                    ->defaultValue('BrammmMenu::menu_theme.html.twig')
+                    ->defaultValue('BrammmMenuBundle::menu_theme.html.twig')
                 ->end()
             ->end();
 
