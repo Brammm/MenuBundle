@@ -1,10 +1,9 @@
 Brammm\MenuBundle
 ===================
 
-A menu bundle that's very themeable. (*)
+**Note: This is really early stuff and not finished yet**
 
-*\*: Not yet fully finished*
-
+A menu bundle that's very themeable.
 
 ## Install
 
@@ -25,6 +24,50 @@ Via Composer (the bundle isn't added to Packagist just yet, so you have to add t
 ```
 
 ## Usage
+
+Create a class that extends the `Brammm\MenuBundle\Menu\AbstractBuilder`. Implement the `buildMenu` method. 
+
+Create a menu and return it like so:
+
+```php 
+public function buildMenu()
+{
+    $menu = new MenuItem('nav', $this);
+
+    $menu
+        ->addChild('Home', [
+            'path' => 'home',
+        ])->end()
+        ->addChild('Manage', [
+            'uri' => '#'
+        ])
+            ->addChild('Blog', [
+                'path' => 'blog',
+            ])->end()
+            ->addChild('Comments', [
+                'path' => 'comments',
+            ])->end()
+        ->end();
+
+    return $menu;
+}
+```
+
+Define the Builder as a service and tag it.
+
+```xml
+<service id="acme_demo.menu.nav" class="Acme\DemoBundle\Menu\NavBuilder">
+    <tag name="brammm_menu.menu"/>
+</service>
+```
+
+Render the nav using 
+
+```
+{{ brammm_menu_render('nav') }}
+```
+
+**Note:** `nav` is the name you gave the menu when creating it in the builder.
 
 
 ## Contributing
