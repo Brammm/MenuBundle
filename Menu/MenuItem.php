@@ -4,8 +4,9 @@ namespace Brammm\MenuBundle\Menu;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Traversable;
 
-class MenuItem
+class MenuItem implements \IteratorAggregate
 {
 
     /** @var string */
@@ -146,5 +147,16 @@ class MenuItem
         $this->uri = $uri;
         return $this;
     }
+
+    /**
+     * Implements IteratorAggregate
+     *
+     * @return \ArrayIterator|Traversable
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->children);
+    }
+
 
 } 

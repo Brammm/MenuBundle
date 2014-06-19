@@ -19,21 +19,22 @@ class MenuExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getTokenParsers()
+    public function getFunctions()
     {
-        return array(
-            new MenuThemeTokenParser(),
-        );
+        return [
+            new \Twig_SimpleFunction('menu_item', [$this->renderer, 'renderItem'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('brammm_menu_render', [$this->renderer, 'renderMenu'], ['is_safe' => ['html']]),
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
+    public function getTokenParsers()
     {
-        return [
-            new \Twig_SimpleFunction('brammm_menu_render', [$this->renderer, 'renderMenu']),
-        ];
+        return array(
+            new MenuThemeTokenParser(),
+        );
     }
 
     /**

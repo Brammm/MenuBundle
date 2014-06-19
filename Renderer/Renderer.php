@@ -2,6 +2,7 @@
 
 namespace Brammm\MenuBundle\Renderer;
 
+use Brammm\MenuBundle\Menu\MenuItem;
 use Brammm\MenuBundle\Provider\MenuProvider;
 
 class Renderer implements RendererInterface
@@ -26,13 +27,15 @@ class Renderer implements RendererInterface
     public function renderMenu($menuName)
     {
         $menu = $this->provider->getMenu($menuName);
-
-        var_dump($menu); exit;
-
-        return $this->renderBlock('menu');
+        return $this->renderBlock('menu', ['menu' => $menu]);
     }
 
-    public function renderBlock($block, array $data = [])
+    public function renderItem(MenuItem $item)
+    {
+        return $this->renderBlock('menu_item', ['item' => $item]);
+    }
+
+    public function renderBlock($block, $data = [])
     {
         return $this->theme->renderBlock($block, $data);
     }

@@ -1,3 +1,11 @@
 {% block menu %}
-    Hoorah!
+    <ul>
+    {% for item in menu %}
+        {{ menu_item(item) }}
+    {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block menu_item %}
+    <li><a href="#">{{ item.name }}</a></li>
 {% endblock %}
