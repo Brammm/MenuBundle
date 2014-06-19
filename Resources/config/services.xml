@@ -21,5 +21,7 @@
             <argument>%brammm_menu.theme%</argument>
         </service>
 
+        <service id="brammm_menu.menu_provider" class="Brammm\MenuBundle\Provider\MenuProvider" />
+
     </services>
 </container>

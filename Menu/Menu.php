@@ -2,17 +2,83 @@
 
 namespace Brammm\MenuBundle\Menu;
 
-class Menu 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+class Menu
 {
-    /** @var Node[] */
-    private $nodes;
+
     /** @var string */
     private $name;
+    /** @var string */
+    private $uri;
+    /** @var string */
+    private $path;
+    /** @var BuilderInterface */
+    private $builder;
+    /** @var Menu */
+    private $parent;
+    /** @var Menu[] */
+    private $children;
 
-    public function __construct($name)
+    /**
+     * @param                  $name
+     * @param BuilderInterface $builder
+     */
+    public function __construct($name, BuilderInterface $builder)
     {
-        $this->name = $name;
+        $this->name    = $name;
+        $this->builder = $builder;
     }
+
+    /**
+     * @param $label
+     * @param $options
+     *
+     * @return Menu
+     */
+    public function addChild($label, $options)
+    {
+        $menu = new Menu($label, $this->builder);
+
+        $resolver = new OptionsResolver();
+        $this->setDefaultOptions($resolver);
+        $options = $resolver->resolve($options);
+
+        $menu
+            ->setPath($options['path'])
+            ->setUri($options['uri']);
+
+        $menu->setParent($this);
+
+        return $menu;
+    }
+
+    /**
+     * Convenience method
+     *
+     * @return Menu|null
+     */
+    public function end()
+    {
+        return $this->getParent();
+    }
+
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'path' => null,
+            'uri'  => null,
+        ]);
+        $this->builder->setDefaultOptions($resolver);
+    }
+
+    ###########################
+    #### SETTERS & GETTERS ####
+    ###########################
 
     /**
      * @return string
@@ -23,66 +89,60 @@ class Menu
     }
 
     /**
-     * @param string $name
+     * @return Menu
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param Menu $parent
      *
      * @return $this
      */
-    public function setName($name)
+    public function setParent($parent)
     {
-        $this->name = $name;
+        $this->parent = $parent;
         return $this;
     }
 
     /**
-     * @return Node[]
+     * @return string
      */
-    public function getNodes()
+    public function getPath()
     {
-        return $this->nodes;
+        return $this->path;
     }
 
     /**
-     * @param Node[] $nodes
+     * @param string $path
      *
      * @return $this
      */
-    public function setNodes($nodes)
+    public function setPath($path)
     {
-        $this->nodes = $nodes;
+        $this->path = $path;
         return $this;
     }
 
     /**
-     * @param Node $node
-     *
-     * @return $this
+     * @return string
      */
-    public function addNode(Node $node)
+    public function getUri()
     {
-        $this->nodes[] = $node;
-        return $node;
+        return $this->uri;
     }
 
     /**
-     * @param Node $node
+     * @param string $uri
      *
      * @return $this
      */
-    public function removeNode(Node $node)
+    public function setUri($uri)
     {
-        if (null === $this->nodes) {
-            return $this;
-        }
-
-        foreach ($this->nodes as $key => $chChild) {
-            if ($chChild === $node) {
-                unset($this->nodes[$key]);
-                $this->nodes = array_values($this->nodes); // reset keys
-                return $this;
-            }
-        }
+        $this->uri = $uri;
         return $this;
     }
-
 
 } 
