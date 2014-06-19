@@ -5,7 +5,7 @@ namespace Brammm\MenuBundle\Menu;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class Menu
+class MenuItem
 {
 
     /** @var string */
@@ -16,9 +16,9 @@ class Menu
     private $path;
     /** @var BuilderInterface */
     private $builder;
-    /** @var Menu */
+    /** @var MenuItem */
     private $parent;
-    /** @var Menu[] */
+    /** @var MenuItem[] */
     private $children;
 
     /**
@@ -35,11 +35,11 @@ class Menu
      * @param $label
      * @param $options
      *
-     * @return Menu
+     * @return MenuItem
      */
     public function addChild($label, $options)
     {
-        $menu = new Menu($label, $this->builder);
+        $menu = new MenuItem($label, $this->builder);
 
         $resolver = new OptionsResolver();
         $this->setDefaultOptions($resolver);
@@ -51,13 +51,15 @@ class Menu
 
         $menu->setParent($this);
 
+        $this->children[] = $menu;
+
         return $menu;
     }
 
     /**
      * Convenience method
      *
-     * @return Menu|null
+     * @return MenuItem|null
      */
     public function end()
     {
@@ -89,7 +91,7 @@ class Menu
     }
 
     /**
-     * @return Menu
+     * @return MenuItem
      */
     public function getParent()
     {
@@ -97,7 +99,7 @@ class Menu
     }
 
     /**
-     * @param Menu $parent
+     * @param MenuItem $parent
      *
      * @return $this
      */

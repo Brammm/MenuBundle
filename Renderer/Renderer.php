@@ -2,22 +2,33 @@
 
 namespace Brammm\MenuBundle\Renderer;
 
+use Brammm\MenuBundle\Provider\MenuProvider;
+
 class Renderer implements RendererInterface
 {
 
-    /** @var \Twig_Template */
-    private $theme;
     /** @var \Twig_Environment */
     private $environment;
+    /** @var MenuProvider */
+    private $provider;
+    /** @var \Twig_Template */
+    private $theme;
 
-    public function __construct(\Twig_Environment $environment, $theme)
+    public function __construct(\Twig_Environment $environment, MenuProvider $provider, $theme)
     {
-        $this->environment  = $environment;
-        $this->setTheme($theme); // Use setter because probably string
+        // Use setter because probably string
+        $this->environment = $environment;
+        $this->provider    = $provider;
+
+        $this->setTheme($theme);
     }
 
-    public function renderMenu()
+    public function renderMenu($menuName)
     {
+        $menu = $this->provider->getMenu($menuName);
+
+        var_dump($menu); exit;
+
         return $this->renderBlock('menu');
     }
 

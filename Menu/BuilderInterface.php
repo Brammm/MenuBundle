@@ -7,9 +7,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 interface BuilderInterface
 {
     /**
-     * Create a new Menu and return it
+     * Create a new MenuItem and return it
      *
-     * @return Menu
+     * @return MenuItem
      */
     public function buildMenu();
 

@@ -11,8 +11,6 @@ class MenuProvider
 
     public function addMenu(BuilderInterface $builder)
     {
-        var_dump($builder); exit;
-
         $menu = $builder->buildMenu();
         $this->menus[$menu->getName()] = $menu;
 

@@ -5,23 +5,25 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="brammm_menu.twig.extension.menu.class">Brammm\MenuBundle\Twig\Extension\MenuExtension</parameter>
+        <parameter key="brammm_menu.menu_provider.class">Brammm\MenuBundle\Provider\MenuProvider</parameter>
         <parameter key="brammm_menu.menu_renderer.class">Brammm\MenuBundle\Renderer\Renderer</parameter>
+        <parameter key="brammm_menu.twig.extension.menu.class">Brammm\MenuBundle\Twig\Extension\MenuExtension</parameter>
     </parameters>
 
     <services>
+
+        <service id="brammm_menu.menu_provider" class="%brammm_menu.menu_provider.class%" />
+
+        <service id="brammm_menu.menu_renderer" class="%brammm_menu.menu_renderer.class%">
+            <argument type="service" id="twig" />
+            <argument type="service" id="brammm_menu.menu_provider" />
+            <argument>%brammm_menu.theme%</argument>
+        </service>
 
         <service id="brammm_menu.twig.extension.menu" class="%brammm_menu.twig.extension.menu.class%" public="false">
             <argument type="service" id="brammm_menu.menu_renderer" />
             <tag name="twig.extension" />
         </service>
-
-        <service id="brammm_menu.menu_renderer" class="%brammm_menu.menu_renderer.class%">
-            <argument type="service" id="twig" />
-            <argument>%brammm_menu.theme%</argument>
-        </service>
-
-        <service id="brammm_menu.menu_provider" class="Brammm\MenuBundle\Provider\MenuProvider" />
 
     </services>
 </container>
