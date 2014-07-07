@@ -18,10 +18,19 @@
 {% endblock %}
 
 {% block menu_link %}
+    <a {{ block('link_attributes') }}>{{ item.name }}</a>
+{% endblock %}
+
+{% block link_attributes %}
+{% spaceless %}
+
     {% if item.uri %}
         {% set uri = item.uri %}
     {% else %}
         {% set uri = path(item.path) %}
     {% endif %}
-    <a href="{{ uri }}">{{ item.name }}</a>
+
+    href="{{ uri }}"
+
+{% endspaceless %}
 {% endblock %}
