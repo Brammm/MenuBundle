@@ -1,9 +1,11 @@
 {% block menu %}
+    {% if item.children %}
     <ul>
-    {% for item in menu %}
-        {{ menu_item(item) }}
-    {% endfor %}
+        {% for child in item.children %}
+            {{ menu_item(child) }}
+        {% endfor %}
     </ul>
+    {% endif %}
 {% endblock %}
 
 {% block menu_item %}

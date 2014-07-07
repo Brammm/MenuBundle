@@ -20,9 +20,9 @@ class Renderer implements RendererInterface
         $this->setTheme($theme);
     }
 
-    public function renderMenu(MenuItem $menu)
+    public function renderMenu(MenuItem $item)
     {
-        return $this->renderBlock('menu', ['menu' => $menu]);
+        return $this->renderBlock('menu', ['item' => $item]);
     }
 
     public function renderItem(MenuItem $item)

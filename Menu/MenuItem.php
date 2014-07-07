@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Traversable;
 
-class MenuItem implements \IteratorAggregate, \Countable
+class MenuItem
 {
 
     /** @var string */
@@ -114,27 +114,13 @@ class MenuItem implements \IteratorAggregate, \Countable
         return $this;
     }
 
-    #####################
-    #### INTERFACING ####
-    #####################
-
     /**
-     * Implements IteratorAggregate
-     *
-     * @return \ArrayIterator|Traversable
+     * @return MenuItem[]
      */
-    public function getIterator()
+    public function getChildren()
     {
-        return new \ArrayIterator($this->children);
+        return $this->children;
     }
 
-    /**
-     * Implements Countable
-     *
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->children);
-    }
+
 }
