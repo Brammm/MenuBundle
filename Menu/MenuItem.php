@@ -11,25 +11,25 @@ class MenuItem implements \IteratorAggregate, \Countable
 
     /** @var string */
     private $name;
+    /** @var array */
+    private $defaultOptions;
     /** @var string */
     private $uri;
     /** @var string */
     private $path;
-    /** @var BuilderInterface */
-    private $builder;
     /** @var MenuItem */
     private $parent;
     /** @var MenuItem[] */
     private $children;
 
     /**
-     * @param                  $name
-     * @param BuilderInterface $builder
+     * @param string $name
+     * @param array  $defaultOptions
      */
-    public function __construct($name, BuilderInterface $builder)
+    public function __construct($name, array $defaultOptions = [])
     {
-        $this->name    = $name;
-        $this->builder = $builder;
+        $this->name           = $name;
+        $this->defaultOptions = $defaultOptions;
     }
 
     /**
@@ -40,7 +40,7 @@ class MenuItem implements \IteratorAggregate, \Countable
      */
     public function addChild($label, $options)
     {
-        $menu = new MenuItem($label, $this->builder);
+        $menu = new MenuItem($label, $this->defaultOptions);
 
         $resolver = new OptionsResolver();
         $this->setDefaultOptions($resolver);
@@ -72,11 +72,12 @@ class MenuItem implements \IteratorAggregate, \Countable
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
+        $this->defaultOptions += [
             'path' => null,
             'uri'  => null,
-        ]);
-        $this->builder->setDefaultOptions($resolver);
+        ];
+
+        $resolver->setDefaults($this->defaultOptions);
     }
 
     public function hasChildren()

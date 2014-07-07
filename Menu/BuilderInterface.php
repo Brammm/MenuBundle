@@ -2,8 +2,6 @@
 
 namespace Brammm\MenuBundle\Menu;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 interface BuilderInterface
 {
     /**
@@ -13,11 +11,4 @@ interface BuilderInterface
      */
     public function buildMenu();
 
-    /**
-     * Sets the default options for the menu.
-     *
-     * @param OptionsResolverInterface $resolver The resolver for the options.
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver);
-
-} 
+}
