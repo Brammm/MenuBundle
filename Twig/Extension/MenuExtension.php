@@ -24,7 +24,6 @@ class MenuExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('brammm_menu', [$this->renderer, 'renderMenu'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('menu_item', [$this->renderer, 'renderItem'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('menu_link', [$this->renderer, 'renderLink'], ['is_safe' => ['html']]),
         ];
     }
 

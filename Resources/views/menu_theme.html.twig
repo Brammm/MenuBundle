@@ -10,9 +10,9 @@
 
 {% block menu_item %}
     <li>
-        {{ menu_link(item) }}
+        {{ block('menu_link') }}
         {% if item.hasChildren %}
-            {{ brammm_menu(item) }}
+            {{ block('menu') }}
         {% endif %}
     </li>
 {% endblock %}
