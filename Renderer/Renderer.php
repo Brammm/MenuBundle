@@ -3,23 +3,19 @@
 namespace Brammm\MenuBundle\Renderer;
 
 use Brammm\MenuBundle\Menu\MenuItem;
-use Brammm\MenuBundle\Provider\MenuProvider;
 
 class Renderer implements RendererInterface
 {
 
     /** @var \Twig_Environment */
     private $environment;
-    /** @var MenuProvider */
-    private $provider;
     /** @var \Twig_Template */
     private $theme;
 
-    public function __construct(\Twig_Environment $environment, MenuProvider $provider, $theme)
+    public function __construct(\Twig_Environment $environment, $theme)
     {
         // Use setter because probably string
         $this->environment = $environment;
-        $this->provider    = $provider;
 
         $this->setTheme($theme);
     }
