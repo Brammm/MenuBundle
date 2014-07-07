@@ -23,14 +23,12 @@
 
 {% block link_attributes %}
 {% spaceless %}
-
-    {% if item.uri %}
+    {%- if item.uri -%}
         {% set uri = item.uri %}
-    {% else %}
+    {%- else -%}
         {% set uri = path(item.path) %}
-    {% endif %}
+    {%- endif -%}
 
     href="{{ uri }}"
-
 {% endspaceless %}
 {% endblock %}
