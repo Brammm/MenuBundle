@@ -13,10 +13,6 @@ class MenuItem implements \IteratorAggregate, \Countable
     private $name;
     /** @var array */
     private $defaultOptions;
-    /** @var string */
-    private $uri;
-    /** @var string */
-    private $path;
     /** @var MenuItem */
     private $parent;
     /** @var MenuItem[] */
@@ -25,11 +21,18 @@ class MenuItem implements \IteratorAggregate, \Countable
     /**
      * @param string $name
      * @param array  $defaultOptions
+     * @param array  $options
      */
-    public function __construct($name, array $defaultOptions = [])
+    public function __construct($name, array $defaultOptions = [], array $options = [])
     {
         $this->name           = $name;
         $this->defaultOptions = $defaultOptions;
+
+        $options = $this->getResolvedOptions($options);
+
+        foreach ($options as $key => $value) {
+            $this->{$key} = $value;
+        }
     }
 
     /**
@@ -40,18 +43,8 @@ class MenuItem implements \IteratorAggregate, \Countable
      */
     public function addChild($label, $options)
     {
-        $menu = new MenuItem($label, $this->defaultOptions);
-
-        $resolver = new OptionsResolver();
-        $this->setDefaultOptions($resolver);
-        $options = $resolver->resolve($options);
-
-        $menu
-            ->setPath($options['path'])
-            ->setUri($options['uri']);
-
+        $menu = new MenuItem($label, $this->defaultOptions, $options);
         $menu->setParent($this);
-
         $this->children[] = $menu;
 
         return $menu;
@@ -68,16 +61,21 @@ class MenuItem implements \IteratorAggregate, \Countable
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param array $options
+     *
+     * @return array
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getResolvedOptions(array $options)
     {
         $this->defaultOptions += [
             'path' => null,
             'uri'  => null,
         ];
 
+        $resolver = new OptionsResolver();
         $resolver->setDefaults($this->defaultOptions);
+
+        return $resolver->resolve($options);
     }
 
     public function hasChildren()
@@ -113,44 +111,6 @@ class MenuItem implements \IteratorAggregate, \Countable
     public function setParent($parent)
     {
         $this->parent = $parent;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return $this
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUri()
-    {
-        return $this->uri;
-    }
-
-    /**
-     * @param string $uri
-     *
-     * @return $this
-     */
-    public function setUri($uri)
-    {
-        $this->uri = $uri;
         return $this;
     }
 
