@@ -24,12 +24,6 @@ class Renderer implements RendererInterface
         $this->setTheme($theme);
     }
 
-    public function render($menuName)
-    {
-        $menu = $this->provider->getMenu($menuName);
-        return $this->renderBlock('menu', ['menu' => $menu]);
-    }
-
     public function renderMenu(MenuItem $menu)
     {
         return $this->renderBlock('menu', ['menu' => $menu]);

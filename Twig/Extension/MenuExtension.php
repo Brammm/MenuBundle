@@ -22,10 +22,9 @@ class MenuExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('menu', [$this->renderer, 'renderMenu'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('brammm_menu', [$this->renderer, 'renderMenu'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('menu_item', [$this->renderer, 'renderItem'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('menu_link', [$this->renderer, 'renderLink'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('brammm_menu_render', [$this->renderer, 'render'], ['is_safe' => ['html']]),
         ];
     }
 
