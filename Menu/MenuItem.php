@@ -41,12 +41,12 @@ class MenuItem
     }
 
     /**
-     * @param $label
-     * @param $options
+     * @param string $label
+     * @param array  $options
      *
      * @return MenuItem
      */
-    public function addChild($label, $options)
+    public function addChild($label, array $options = [])
     {
         $menu = new MenuItem($label, $this->defaultOptions, $options);
         $menu->setParent($this);
