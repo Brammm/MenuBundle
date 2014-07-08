@@ -6,6 +6,11 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * Add tagged menus to the provider
+ *
+ * @author Bram Van der Sype <bram.vandersype@gmail.com>
+ */
 class AddMenusPass implements CompilerPassInterface
 {
 

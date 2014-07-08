@@ -6,6 +6,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Traversable;
 
+/**
+ * Representation of a MenuItem
+ *
+ * @author Bram Van der Sype <bram.vandersype@gmail.com>
+ */
 class MenuItem
 {
 
@@ -78,11 +83,6 @@ class MenuItem
         return $resolver->resolve($options);
     }
 
-    public function hasChildren()
-    {
-        return count($this) > 0;
-    }
-
     ###########################
     #### SETTERS & GETTERS ####
     ###########################
@@ -112,6 +112,14 @@ class MenuItem
     {
         $this->parent = $parent;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasChildren()
+    {
+        return count($this->children) > 0;
     }
 
     /**
