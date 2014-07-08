@@ -15,6 +15,21 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
         new MenuItem('foo', [], ['foo' => 'bar']);
     }
 
+    public function testHasName()
+    {
+        $SUT = new MenuItem('foo');
+
+        $this->assertEquals('foo', $SUT->getName());
+    }
+
+    public function hasDefaultPathAndUri()
+    {
+        $SUT = new MenuItem('foo');
+
+        $this->assertNull($SUT->path);
+        $this->assertNull($SUT->uri);
+    }
+
     public function testCanHaveDefaultOptions()
     {
         $SUT = new MenuItem('foo', ['foo' => 'bar']);
@@ -54,6 +69,6 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
         $child = $SUT->addChild('bar');
 
         $this->assertEquals($SUT, $child->getParent());
-
+        $this->assertEquals($SUT, $child->end());
     }
 } 
