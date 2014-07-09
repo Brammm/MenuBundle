@@ -4,16 +4,14 @@ php:
   - 5.4
   - 5.5
 
-script: phpunit
-
 before_script:
   - composer selfupdate
   - composer install --dev --prefer-source --no-interaction
 
-  script:
+script:
     - phpunit --coverage-clover=coverage.clover
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
-  notifications:
-      email: false
+notifications:
+    email: false
