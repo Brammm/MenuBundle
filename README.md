@@ -3,6 +3,7 @@ Brammm\MenuBundle
 
 [![Build Status](https://travis-ci.org/Brammm/MenuBundle.svg?branch=master)](https://travis-ci.org/Brammm/MenuBundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Brammm/MenuBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Brammm/MenuBundle/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Brammm/MenuBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Brammm/MenuBundle/?branch=master)
 
 **Note: This is really early stuff and not finished yet**
 
