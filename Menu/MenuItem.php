@@ -3,8 +3,6 @@
 namespace Brammm\MenuBundle\Menu;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Traversable;
 
 /**
  * Representation of a MenuItem
