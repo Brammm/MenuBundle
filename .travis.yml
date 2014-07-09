@@ -8,4 +8,12 @@ script: phpunit
 
 before_script:
   - composer selfupdate
-  - composer install
+  - composer install --dev --prefer-source --no-interaction
+
+  script:
+    - phpunit --coverage-clover=coverage.clover
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+
+  notifications:
+      email: false
