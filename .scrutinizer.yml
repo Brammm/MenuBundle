@@ -18,7 +18,6 @@ checks:
         psr2_switch_declaration: true
         psr2_control_structure_declaration: true
         psr2_class_declaration: true
-        no_space_around_object_operator: true
         no_space_before_semicolon: true
         no_exit: true
         no_eval: true
