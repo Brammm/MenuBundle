@@ -6,9 +6,9 @@ class TwigRendererTest extends \PHPUnit_Framework_TestCase
 {
     /** @var TwigRenderer */
     private $SUT;
-    /** @var \Twig_Environment|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var \PHPUnit_Framework_MockObject_MockObject */
     private $environment;
-    /** @var \Twig_TemplateTest|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var \PHPUnit_Framework_MockObject_MockObject */
     private $template;
 
     public function setUp()
