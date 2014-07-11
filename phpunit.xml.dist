@@ -14,13 +14,14 @@
         bootstrap                   = "./vendor/autoload.php" >
 
     <testsuites>
-        <testsuite name="Tests">
-            <directory suffix=".php">./Tests</directory>
+        <testsuite name="brammm\menu-bundle test suite">
+            <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>
+
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">.</directory>
+            <directory>./</directory>
             <exclude>
                 <directory>./Resources</directory>
                 <directory>./Tests</directory>
