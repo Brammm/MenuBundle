@@ -38,4 +38,4 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
         return $processor->processConfiguration(new Configuration(), $configs);
     }
-} 
+}
