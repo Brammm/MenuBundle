@@ -71,4 +71,4 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($SUT, $child->getParent());
         $this->assertEquals($SUT, $child->end());
     }
-} 
+}

@@ -127,6 +127,4 @@ class MenuItem
     {
         return $this->children;
     }
-
-
 }

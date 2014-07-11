@@ -15,6 +15,4 @@ interface BuilderInterface
      * @return MenuItem
      */
     public function buildMenu();
-
-
 }

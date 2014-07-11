@@ -34,4 +34,4 @@ class MenuProvider
     {
         return $this->menus[$name];
     }
-} 
+}
