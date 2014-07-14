@@ -46,4 +46,4 @@ class MenuExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(in_array('menu_theme', $tags));
     }
-} 
+}
