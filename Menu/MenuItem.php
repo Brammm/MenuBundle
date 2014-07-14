@@ -20,6 +20,8 @@ class MenuItem
     private $parent;
     /** @var MenuItem[] */
     private $children;
+    /** @var int */
+    private $level;
 
     /**
      * @param string $name
@@ -29,6 +31,7 @@ class MenuItem
     public function __construct($name, array $defaultOptions = [], array $options = [])
     {
         $this->name           = $name;
+        $this->level          = 0;
         $this->defaultOptions = $defaultOptions;
 
         $options = $this->getResolvedOptions($options);
@@ -46,11 +49,12 @@ class MenuItem
      */
     public function addChild($label, array $options = [])
     {
-        $menu = new MenuItem($label, $this->defaultOptions, $options);
-        $menu->setParent($this);
-        $this->children[] = $menu;
+        $child = new MenuItem($label, $this->defaultOptions, $options);
+        $child->setParent($this);
+        $child->setLevel($this->getLevel() + 1);
+        $this->children[] = $child;
 
-        return $menu;
+        return $child;
     }
 
     /**
@@ -127,4 +131,32 @@ class MenuItem
     {
         return $this->children;
     }
+
+    /**
+     * @return int
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param int $level
+     *
+     * @return $this
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRoot()
+    {
+        return 0 === $this->level;
+    }
+
 }

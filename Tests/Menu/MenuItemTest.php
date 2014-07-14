@@ -71,4 +71,24 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($SUT, $child->getParent());
         $this->assertEquals($SUT, $child->end());
     }
+
+    public function testHasIncreasingLevel()
+    {
+        $parent   = new MenuItem('parent');
+        $child    = $parent->addChild('child');
+        $subChild = $child->addChild('subchild');
+
+        $this->assertEquals(0, $parent->getLevel());
+        $this->assertEquals(1, $child->getLevel());
+        $this->assertEquals(2, $subChild->getLevel());
+    }
+
+    public function testCanCheckForRoot()
+    {
+        $parent = new MenuItem('parent');
+        $child  = $parent->addChild('child');
+
+        $this->assertTrue($parent->isRoot());
+        $this->assertFalse($child->isRoot());
+    }
 }
