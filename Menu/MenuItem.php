@@ -31,7 +31,6 @@ class MenuItem
     public function __construct($name, array $defaultOptions = [], array $options = [])
     {
         $this->name           = $name;
-        $this->level          = 0;
         $this->defaultOptions = $defaultOptions;
 
         $options = $this->getResolvedOptions($options);
@@ -51,7 +50,7 @@ class MenuItem
     {
         $child = new MenuItem($label, $this->defaultOptions, $options);
         $child->setParent($this);
-        $child->setLevel($this->getLevel() + 1);
+        $child->setLevel((null === $this->getLevel() ? 0 : $this->getLevel() + 1));
         $this->children[] = $child;
 
         return $child;
