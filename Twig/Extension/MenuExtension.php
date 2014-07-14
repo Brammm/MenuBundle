@@ -26,6 +26,8 @@ class MenuExtension extends \Twig_Extension
 
     /**
      * {@inheritdoc}
+     *
+     * @return \Twig_SimpleFunction[]
      */
     public function getFunctions()
     {
@@ -37,12 +39,14 @@ class MenuExtension extends \Twig_Extension
 
     /**
      * {@inheritdoc}
+     *
+     * @return \Twig_TokenParser[]
      */
     public function getTokenParsers()
     {
-        return array(
+        return [
             new MenuThemeTokenParser(),
-        );
+        ];
     }
 
     /**
