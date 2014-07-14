@@ -5,20 +5,20 @@ namespace Brammm\MenuBundle\Menu;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Representation of a MenuItem
+ * Representation of a Item
  *
  * @author Bram Van der Sype <bram.vandersype@gmail.com>
  */
-class MenuItem
+class Item
 {
 
     /** @var string */
     private $name;
     /** @var array */
     private $defaultOptions;
-    /** @var MenuItem */
+    /** @var Item */
     private $parent;
-    /** @var MenuItem[] */
+    /** @var Item[] */
     private $children;
     /** @var int */
     private $level;
@@ -44,11 +44,11 @@ class MenuItem
      * @param string $label
      * @param array  $options
      *
-     * @return MenuItem
+     * @return Item
      */
     public function addChild($label, array $options = [])
     {
-        $child = new MenuItem($label, $this->defaultOptions, $options);
+        $child = new Item($label, $this->defaultOptions, $options);
         $child->setParent($this);
         $child->setLevel((null === $this->getLevel() ? 0 : $this->getLevel() + 1));
         $this->children[] = $child;
@@ -59,7 +59,7 @@ class MenuItem
     /**
      * Convenience method
      *
-     * @return MenuItem|null
+     * @return Item|null
      */
     public function end()
     {
@@ -97,7 +97,7 @@ class MenuItem
     }
 
     /**
-     * @return MenuItem
+     * @return Item
      */
     public function getParent()
     {
@@ -105,7 +105,7 @@ class MenuItem
     }
 
     /**
-     * @param MenuItem $parent
+     * @param Item $parent
      *
      * @return $this
      */
@@ -124,7 +124,7 @@ class MenuItem
     }
 
     /**
-     * @return MenuItem[]
+     * @return Item[]
      */
     public function getChildren()
     {

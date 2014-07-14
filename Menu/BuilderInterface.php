@@ -10,9 +10,9 @@ namespace Brammm\MenuBundle\Menu;
 interface BuilderInterface
 {
     /**
-     * Create a new MenuItem and return it
+     * Create a new Item and return it
      *
-     * @return MenuItem
+     * @return Item
      */
     public function buildMenu();
 }

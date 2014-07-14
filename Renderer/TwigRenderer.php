@@ -2,7 +2,7 @@
 
 namespace Brammm\MenuBundle\Renderer;
 
-use Brammm\MenuBundle\Menu\MenuItem;
+use Brammm\MenuBundle\Menu\Item;
 
 /**
  * Renders blocks from a template.
@@ -32,7 +32,7 @@ class TwigRenderer implements RendererInterface
     /**
      * {@inheritDoc}
      */
-    public function setTheme(MenuItem $menuItem, $theme)
+    public function setTheme(Item $menuItem, $theme)
     {
         $this->themes[$menuItem->getName()] = $theme;
     }
@@ -40,7 +40,7 @@ class TwigRenderer implements RendererInterface
     /**
      * {@inheritDoc}
      */
-    public function renderMenu(MenuItem $item)
+    public function renderMenu(Item $item)
     {
         return $this->renderBlock('menu', $item);
     }
@@ -48,7 +48,7 @@ class TwigRenderer implements RendererInterface
     /**
      * {@inheritDoc}
      */
-    public function renderItem(MenuItem $item)
+    public function renderItem(Item $item)
     {
         return $this->renderBlock('menu_item', $item);
     }
@@ -57,11 +57,11 @@ class TwigRenderer implements RendererInterface
      * Renders a block from a template
      *
      * @param string   $block
-     * @param MenuItem $item
+     * @param Item $item
      *
      * @return string
      */
-    private function renderBlock($block, MenuItem $item)
+    private function renderBlock($block, Item $item)
     {
         return $this
             ->getTemplate($this->getThemeForItem($item))
@@ -69,15 +69,15 @@ class TwigRenderer implements RendererInterface
     }
 
     /**
-     * Get the theme for a specific MenuItem
-     * Sees if the MenuItem itself has a theme set
+     * Get the theme for a specific Item
+     * Sees if the Item itself has a theme set
      * or one of it's parents
      *
-     * @param MenuItem $item
+     * @param Item $item
      *
      * @return \Twig_Template
      */
-    private function getThemeForItem(MenuItem $item)
+    private function getThemeForItem(Item $item)
     {
         do {
             if (isset($this->themes[$item->getName()])) {

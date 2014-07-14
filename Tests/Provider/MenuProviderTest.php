@@ -18,13 +18,13 @@ class MenuProviderTest extends \PHPUnit_Framework_TestCase
     {
         $this->addMenu();
 
-        $this->assertInstanceOf('Brammm\MenuBundle\Menu\MenuItem', $this->SUT->getMenu('foo'));
+        $this->assertInstanceOf('Brammm\MenuBundle\Menu\Item', $this->SUT->getMenu('foo'));
     }
 
     private function addMenu()
     {
         $menuBuilder = $this->getMock('Brammm\MenuBundle\Menu\BuilderInterface');
-        $menuItem    = $this->getMockBuilder('Brammm\MenuBundle\Menu\MenuItem')
+        $menuItem    = $this->getMockBuilder('Brammm\MenuBundle\Menu\Item')
             ->disableOriginalConstructor()
             ->getMock();
 

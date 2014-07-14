@@ -36,7 +36,7 @@ Create a menu and return it like so:
 ```php 
 public function buildMenu()
 {
-    $menu = new MenuItem('nav', $this);
+    $menu = new Item('nav', $this);
 
     $menu
         ->addChild('Home', [

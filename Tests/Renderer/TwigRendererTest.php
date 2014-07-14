@@ -82,7 +82,7 @@ class TwigRendererTest extends \PHPUnit_Framework_TestCase
 
     private function getItem($name)
     {
-        $item = $this->getMockBuilder('Brammm\MenuBundle\Menu\MenuItem')
+        $item = $this->getMockBuilder('Brammm\MenuBundle\Menu\Item')
             ->disableOriginalConstructor()
             ->getMock();
 

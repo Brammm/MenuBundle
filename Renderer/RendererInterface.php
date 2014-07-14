@@ -2,7 +2,7 @@
 
 namespace Brammm\MenuBundle\Renderer;
 
-use Brammm\MenuBundle\Menu\MenuItem;
+use Brammm\MenuBundle\Menu\Item;
 
 /**
  * Renderer interface
@@ -13,28 +13,28 @@ interface RendererInterface
 {
 
     /**
-     * Set the theme for a specific MenuItem
+     * Set the theme for a specific Item
      *
-     * @param MenuItem $item
+     * @param Item $item
      * @param string   $theme
      */
-    public function setTheme(MenuItem $item, $theme);
+    public function setTheme(Item $item, $theme);
 
     /**
-     * Renders a full menu from the MenuItem's children
+     * Renders a full menu from the Item's children
      *
-     * @param MenuItem $item
+     * @param Item $item
      *
      * @return string
      */
-    public function renderMenu(MenuItem $item);
+    public function renderMenu(Item $item);
 
     /**
-     * Renders a single MenuItem
+     * Renders a single Item
      *
-     * @param MenuItem $item
+     * @param Item $item
      *
      * @return string
      */
-    public function renderItem(MenuItem $item);
+    public function renderItem(Item $item);
 }

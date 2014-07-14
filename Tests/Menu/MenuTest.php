@@ -2,9 +2,9 @@
 
 namespace Brammm\MenuBundle\Tests\Menu;
 
-use Brammm\MenuBundle\Menu\MenuItem;
+use Brammm\MenuBundle\Menu\Item;
 
-class MenuItemTest extends \PHPUnit_Framework_TestCase
+class Test extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -12,19 +12,19 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
      */
     public function testCantHaveUndeclaredOptions()
     {
-        new MenuItem('foo', [], ['foo' => 'bar']);
+        new Item('foo', [], ['foo' => 'bar']);
     }
 
     public function testHasName()
     {
-        $SUT = new MenuItem('foo');
+        $SUT = new Item('foo');
 
         $this->assertEquals('foo', $SUT->getName());
     }
 
     public function hasDefaultPathAndUri()
     {
-        $SUT = new MenuItem('foo');
+        $SUT = new Item('foo');
 
         $this->assertNull($SUT->path);
         $this->assertNull($SUT->uri);
@@ -32,21 +32,21 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
 
     public function testCanHaveDefaultOptions()
     {
-        $SUT = new MenuItem('foo', ['foo' => 'bar']);
+        $SUT = new Item('foo', ['foo' => 'bar']);
 
         $this->assertEquals('bar', $SUT->foo);
     }
 
     public function testCanHaveOptions()
     {
-        $SUT = new MenuItem('foo', ['foo' => 'bar'], ['foo' => 'baz']);
+        $SUT = new Item('foo', ['foo' => 'bar'], ['foo' => 'baz']);
 
         $this->assertEquals('baz', $SUT->foo);
     }
 
     public function testCanAddChild()
     {
-        $SUT = new MenuItem('foo');
+        $SUT = new Item('foo');
 
         $SUT->addChild('bar');
 
@@ -55,7 +55,7 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
 
     public function testCanCheckForChildren()
     {
-        $SUT = new MenuItem('foo');
+        $SUT = new Item('foo');
 
         $SUT->addChild('bar');
 
@@ -64,7 +64,7 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
 
     public function testParentIsSet()
     {
-        $SUT = new MenuItem('foo');
+        $SUT = new Item('foo');
 
         $child = $SUT->addChild('bar');
 
@@ -74,7 +74,7 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
 
     public function testHasIncreasingLevel()
     {
-        $parent   = new MenuItem('parent');
+        $parent   = new Item('parent');
         $child    = $parent->addChild('child');
         $subChild = $child->addChild('subchild');
 
@@ -85,7 +85,7 @@ class MenuItemTest extends \PHPUnit_Framework_TestCase
 
     public function testCanCheckForRoot()
     {
-        $parent   = new MenuItem('parent');
+        $parent   = new Item('parent');
         $child    = $parent->addChild('child');
         $subChild = $child->addChild('subchild');
 
