@@ -1,6 +1,8 @@
 <?php
 
-use Brammm\MenuBundle\Renderer\TwigRenderer;
+namespace Brammm\MenuBundle\Tests\Menu\Renderer;
+
+use Brammm\MenuBundle\Menu\Renderer\TwigRenderer;
 
 class TwigRendererTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +18,7 @@ class TwigRendererTest extends \PHPUnit_Framework_TestCase
         $this->environment = $this->getMockBuilder('\Twig_Environment')
             ->getMock();
 
-        $this->template = $this->getMockBuilder('Twig_TemplateTest')
+        $this->template = $this->getMockBuilder('Brammm\MenuBundle\Tests\Menu\Renderer\Twig_TemplateTest')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -94,15 +96,15 @@ class TwigRendererTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class Twig_TemplateTest extends Twig_Template
+class Twig_TemplateTest extends \Twig_Template
 {
     protected $useExtGetAttribute = false;
 
-    public function __construct(Twig_Environment $env, $useExtGetAttribute = false)
+    public function __construct(\Twig_Environment $env, $useExtGetAttribute = false)
     {
         parent::__construct($env);
         $this->useExtGetAttribute = $useExtGetAttribute;
-        Twig_Template::clearCache();
+        \Twig_Template::clearCache();
     }
 
     public function getZero()
@@ -142,7 +144,7 @@ class Twig_TemplateTest extends Twig_Template
     {
     }
 
-    public function getAttribute($object, $item, array $arguments = array(), $type = Twig_Template::ANY_CALL, $isDefinedTest = false, $ignoreStrictCheck = false)
+    public function getAttribute($object, $item, array $arguments = array(), $type = self::ANY_CALL, $isDefinedTest = false, $ignoreStrictCheck = false)
     {
         if ($this->useExtGetAttribute) {
             return twig_template_get_attributes($this, $object, $item, $arguments, $type, $isDefinedTest, $ignoreStrictCheck);

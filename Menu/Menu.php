@@ -2,34 +2,50 @@
 
 namespace Brammm\MenuBundle\Menu;
 
-class Menu 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+class Menu
 {
     /** @var string */
     private $name;
     /** @var Item[] */
-    private $items;
-    /** @var int */
-    private $level;
+    private $children;
+    /** @var OptionsResolverInterface */
+    private $resolver;
 
-    public function __construct($name, $level) {
-        $this->name  = $name;
-        $this->level = $level;
+    public function __construct($name, OptionsResolverInterface $resolver)
+    {
+        $this->name     = $name;
+        $this->resolver = $resolver;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
      * @return Item[]
      */
-    public function getItems()
+    public function getChildren()
     {
-        return $this->items;
+        return $this->$children;
     }
 
     /**
-     * @return int
+     * @param $name
+     * @param $options
+     *
+     * @return Item
      */
-    public function getLevel()
+    public function addChild($name, $options)
     {
-        return $this->level;
+        $item = new Item($name, $this->resolver, $options, 0, count($this->children), null);
+        $this->children[] = $item;
+        return $item;
     }
 
 }

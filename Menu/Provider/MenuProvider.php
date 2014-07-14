@@ -1,8 +1,10 @@
 <?php
 
-namespace Brammm\MenuBundle\Provider;
+namespace Brammm\MenuBundle\Menu\Provider;
 
-use Brammm\MenuBundle\Menu\BuilderInterface;
+use Brammm\MenuBundle\Menu\Builder\BuilderInterface;
+use Brammm\MenuBundle\Menu\Menu;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Stores and provides menus
@@ -21,7 +23,17 @@ class MenuProvider
      */
     public function addMenu(BuilderInterface $builder)
     {
-        $menu = $builder->buildMenu();
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            'path' => null,
+            'uri'  => null,
+        ]);
+        $builder->setDefaultOptions($resolver);
+
+        $menu = new Menu($builder->getName(), $resolver);
+
+        $builder->buildMenu($menu);
+
         $this->menus[$menu->getName()] = $menu;
 
         return $this;

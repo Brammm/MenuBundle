@@ -1,6 +1,6 @@
 <?php
 
-namespace Brammm\MenuBundle\Renderer;
+namespace Brammm\MenuBundle\Menu\Renderer;
 
 use Brammm\MenuBundle\Menu\Item;
 

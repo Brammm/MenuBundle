@@ -2,7 +2,7 @@
 
 namespace Brammm\MenuBundle\Menu;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Representation of a Item
@@ -14,29 +14,37 @@ class Item
 
     /** @var string */
     private $name;
-    /** @var array */
-    private $defaultOptions;
     /** @var Item */
     private $parent;
-    /** @var Item[] */
-    private $children;
     /** @var int */
     private $level;
+    /** @var $index */
+    private $index;
+    /** @var Item[] */
+    private $children;
+    /** @var OptionsResolverInterface */
+    private $resolver;
 
     /**
-     * @param string $name
-     * @param array  $defaultOptions
-     * @param array  $options
+     * @param string                   $name
+     * @param OptionsResolverInterface $resolver
+     * @param array                    $options
      */
-    public function __construct($name, array $defaultOptions = [], array $options = [])
+    public function __construct($name, OptionsResolverInterface $resolver, array $options = [], $level, $index, $parent)
     {
-        $this->name           = $name;
-        $this->defaultOptions = $defaultOptions;
+        $this->name   = $name;
+        $this->level  = $level;
+        $this->index  = $index;
+        $this->parent = $parent;
 
-        $options = $this->getResolvedOptions($options);
+        $this->resolver = $resolver;
 
-        foreach ($options as $key => $value) {
-            $this->{$key} = $value;
+        $options = $resolver->resolve($options);
+
+        if (is_array($options)) {
+            foreach ($options as $key => $value) {
+                $this->{$key} = $value;
+            }
         }
     }
 
@@ -48,9 +56,7 @@ class Item
      */
     public function addChild($label, array $options = [])
     {
-        $child = new Item($label, $this->defaultOptions, $options);
-        $child->setParent($this);
-        $child->setLevel((null === $this->getLevel() ? 0 : $this->getLevel() + 1));
+        $child = new Item($label, $this->resolver, $options, $this->level + 1, count($this->children), $this);
         $this->children[] = $child;
 
         return $child;
@@ -64,24 +70,6 @@ class Item
     public function end()
     {
         return $this->getParent();
-    }
-
-    /**
-     * @param array $options
-     *
-     * @return array
-     */
-    public function getResolvedOptions(array $options)
-    {
-        $this->defaultOptions += [
-            'path' => null,
-            'uri'  => null,
-        ];
-
-        $resolver = new OptionsResolver();
-        $resolver->setDefaults($this->defaultOptions);
-
-        return $resolver->resolve($options);
     }
 
     ###########################
